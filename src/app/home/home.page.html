@@ -1,0 +1,37 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Blank
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <ion-grid>
+    <div>
+      <div>Partie en cours : </div>
+      <ion-list *ngFor="let tournament of tournaments">
+        <ion-item (click)="joinTournament(tournament.id)" color="white" class="ion-text-center tne-justif">
+          <ion-grid class="ion-no-margin ">
+            <div class="details-erreur">
+              <ion-text>
+                Bla bla
+              </ion-text>
+            </div>
+          </ion-grid>
+        </ion-item>
+      </ion-list>
+    </div>
+    
+    
+      <ion-button color="white" (click)="startNewGame()">
+        <div class="icon-graphique-danger">
+          <ion-icon name="warning" color="danger"></ion-icon>
+        </div>
+        <ion-text (click)="showGameDetail()" color="primary">Nouvelle partie</ion-text>
+      </ion-button>
+    
+  </ion-grid>
+
+</ion-content>

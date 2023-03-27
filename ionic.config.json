@@ -1,0 +1,7 @@
+{
+  "name": "chifumiLaw",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

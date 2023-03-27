@@ -15,8 +15,6 @@ import { GameDetailPage } from '../game-detail/game-detail.page';
 export class HomePage {
 
   socketId: String = "";
-  tournamentName : String = ""
-
   tournaments : Tournament[] = []
 
   constructor(
@@ -28,6 +26,7 @@ export class HomePage {
 
   ionViewVillEnter() {
     this.tournaments = this.socketService.getTournaments();
+    this.socketService.initSocket();
   }
 
   startNewGame() {
@@ -40,12 +39,16 @@ export class HomePage {
       component: GameDetailPage,
     });
     modal.present();
-
     const { data, role } = await modal.onWillDismiss()
+    
+    const tournamentName = data.title
+    console.log("tournamentName : ", tournamentName);
+    const participantName = await this.showNameAlert()
+    console.log("participantName : ", participantName);
 
-    // data.title
+    this.socketService.initTournament(tournamentName, participantName)
 
-    this.showNameAlert()
+    this.router.navigate(['/board'])
 
   }
 
@@ -66,21 +69,12 @@ export class HomePage {
     await alert.present()
     const { data } = await alert.onWillDismiss()
     
-    // const adminParticipant = new Participant(data.value, "", 0)
-    // const tournament = new Tournament([], [], adminParticipant)
-
-    this.socketService.initTournament(data.title)
-
-    // Réccupérer l'ID du tournois afin de créer les objets participant + tournament
-
-
-    this.router.navigate(['/board'])
-
+    return data.values[0]
   }
 
   joinTournament(tournamentId: Number) {
     const name = this.showNameAlert()
-    this.socketService.addParticipant(tournamentId, name)
+    // this.socketService.addParticipant(tournamentId, name)
   }
 
 }

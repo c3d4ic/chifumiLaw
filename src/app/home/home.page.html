@@ -13,13 +13,7 @@
       <div>Partie en cours : </div>
       <ion-list *ngFor="let tournament of tournaments">
         <ion-item (click)="joinTournament(tournament.id)" color="white" class="ion-text-center tne-justif">
-          <ion-grid class="ion-no-margin ">
-            <div class="details-erreur">
-              <ion-text>
-                Bla bla
-              </ion-text>
-            </div>
-          </ion-grid>
+          <div>{{tournament.name}}</div>
         </ion-item>
       </ion-list>
     </div>

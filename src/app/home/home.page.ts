@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, ModalController, NavController } from '@ionic/angular';
-import { Participant } from '../commons/models/participant';
+import { Player } from '../commons/models/player';
 import { Tournament } from '../commons/models/tournament';
 
 import { SocketService } from '../commons/services/socket/socket.service';
@@ -15,7 +15,29 @@ import { GameDetailPage } from '../game-detail/game-detail.page';
 export class HomePage {
 
   socketId: String = "";
-  tournaments : Tournament[] = []
+  tournaments : any[] = [
+    {
+      id: 12,
+      participants: [],
+      game: [],
+      admin: "toto",
+      name: "Nom du tournois"
+    },
+    {
+      id: 12,
+      participants: [],
+      game: [],
+      admin: "toto",
+      name: "Nom du tournois"
+    },
+    {
+      id: 12,
+      participants: [],
+      game: [],
+      admin: "toto",
+      name: "Nom du tournois"
+    }
+  ]
 
   constructor(
     private modalCtrl: ModalController,
@@ -46,7 +68,7 @@ export class HomePage {
     const participantName = await this.showNameAlert()
     console.log("participantName : ", participantName);
 
-    this.socketService.initTournament(tournamentName, participantName)
+    this.socketService.createTournament(tournamentName, participantName)
 
     this.router.navigate(['/board'])
 
@@ -74,7 +96,7 @@ export class HomePage {
 
   joinTournament(tournamentId: Number) {
     const name = this.showNameAlert()
-    // this.socketService.addParticipant(tournamentId, name)
+    // this.socketService.addPlayer(tournamentId, name)
   }
 
 }
